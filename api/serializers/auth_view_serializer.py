@@ -24,3 +24,10 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(password)  # Hash password
         user.save()
         return user
+    
+class UserLoginSerializer(serializers.ModelSerializer):
+    email=serializers.EmailField(max_length=255)
+    class Meta:
+        model = CustomUser
+        fields=['email', 'password']
+        
