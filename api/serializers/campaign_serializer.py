@@ -2,6 +2,8 @@ from rest_framework import serializers
 from api.models.campaign_model import Campaign, CampaignImage
 
 class CampaignImageSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField()
+    
     class Meta:
         model = CampaignImage
         fields = ["id", "image"]
