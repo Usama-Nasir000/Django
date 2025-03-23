@@ -4,21 +4,25 @@ from api.serializers.campaign_serializer import CampaignSerializer, CampaignImag
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 # List all campaigns or create a new one
 class CampaignListCreateView(generics.ListCreateAPIView):
     queryset = Campaign.objects.all()
     serializer_class = CampaignSerializer
+    permission_classes = [IsAuthenticated]
 
 # Retrieve, update, or delete a campaign
 class CampaignDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Campaign.objects.all()
     serializer_class = CampaignSerializer
+    permission_classes = [IsAuthenticated]
 
 # Upload images separately (if needed)
 class CampaignImageUploadView(generics.CreateAPIView):
     parser_classes = (MultiPartParser, FormParser)
     serializer_class = CampaignImageSerializer
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         campaign_id = request.data.get("id")

@@ -1,13 +1,18 @@
 from rest_framework import generics
 from api.models.post_model import Post
 from api.serializers.post_serializer import PostSerializer
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 # Create & List Posts
 class PostListCreateView(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = [IsAuthenticated]
+    
+        
 
 # Retrieve a single post
 class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = [IsAuthenticated]
